@@ -4,6 +4,7 @@ const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 
+const testRoutes = require('./api/routes/tests');
 const userRoutes = require('./api/routes/users');
 const productRoutes = require('./api/routes/products');
 const orderRoutes = require('./api/routes/orders');
@@ -11,7 +12,7 @@ const orderRoutes = require('./api/routes/orders');
 mongoose.connect(
     'mongodb+srv://zewaa:'
     + process.env.MONGO_ATLAS_PW +
-    '@shoppingcart-ss028.mongodb.net/<dbname>?retryWrites=true&w=majority',
+    '@shoppingcart-ss028.mongodb.net/test?retryWrites=true&w=majority',
     {
     useUnifiedTopology:true,
     useNewUrlParser : true,
@@ -39,7 +40,7 @@ app.use('/products',productRoutes);
 app.use('/orders',orderRoutes);
 app.use('/user',userRoutes);
 app.use('/uploads',express.static('uploads'));
-
+app.use('/test',testRoutes);
 
 app.use((req,res,next)=>{
     const error = new Error('Not Found');
